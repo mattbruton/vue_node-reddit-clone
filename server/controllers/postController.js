@@ -10,7 +10,15 @@ const postController = {
     }).catch((err) => {
       return res.status(500).json({message: err});
     })
+  },
+  getAll: (req, res) => {
+    db.Post.find({}).then((allPosts) => {
+      return res.status(200).json({success: true, data: allPosts})
+    }).catch((err) => {
+      return res.status(200).json({message: err});
+    })
   }
 };
+
 
 export default postController;
