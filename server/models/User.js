@@ -12,7 +12,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: [8, 'Password must be at least 8 characters.']
-  }
+  },
+  isDeleted: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now }
 });
 
 const User = mongoose.model('User', userSchema);
