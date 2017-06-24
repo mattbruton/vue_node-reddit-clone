@@ -12,7 +12,17 @@ const postController = {
     })
   },
   getAll: (req, res) => {
-    db.Post.find({}).then((allPosts) => {
+    db.Post.find({})
+    .populate({
+      path: '_creator',
+      select: 'username createdAt -_id'
+    })
+    .populate({
+      path: '_comments',
+      select: 'text createdAt _creator',
+      match: { 'isDeleted': false }
+    })
+    .then((allPosts) => {
       return res.status(200).json({success: true, data: allPosts})
     }).catch((err) => {
       return res.status(200).json({message: err});

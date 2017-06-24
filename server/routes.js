@@ -3,6 +3,7 @@ import express from 'express';
 import defaultController from './controllers/defaultController';
 import userController from './controllers/userController';
 import postController from './controllers/postController';
+import commentController from './controllers/commentController';
 
 const routes = express();
 
@@ -13,7 +14,10 @@ routes.get('/', defaultController.get);
 routes.post('/signup', userController.post);
 
 //Posts
-routes.get('/post', postController.getAll);
+routes.get('/posts', postController.getAll);
 routes.post('/post', postController.post);
+
+//Comments
+routes.post('/comment', commentController.post);
 
 export default routes;
